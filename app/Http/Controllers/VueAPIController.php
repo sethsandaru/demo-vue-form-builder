@@ -45,6 +45,10 @@ class VueAPIController extends Controller
     }
 
     public function insert(Request $rq) {
+        if (config('sandaru.disable_populate')) {
+            return response()->json(['error' => 'Add function is disabled on this site']);
+        }
+
         $title = $rq->post("title");
         $data = $rq->post("formData");
 
@@ -61,6 +65,10 @@ class VueAPIController extends Controller
     }
 
     public function update($id, Request $rq) {
+        if (config('sandaru.disable_populate')) {
+            return response()->json(['error' => 'Update function is disabled on this site']);
+        }
+
         $title = $rq->post("title");
         $data = $rq->post("formData");
 
