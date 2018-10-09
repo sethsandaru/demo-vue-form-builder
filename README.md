@@ -20,6 +20,6 @@ All backend code is using Laravel 5 (Just need Eloquent to do the job :D)
 6. You can visit `http://your_host/your_folder/public` to test :D 
 
 ## Live demo
-You can visit my site here: (Update later)
+You can visit my site here: http://vue-form-builder.sethphat.com
 
 Copyright &copy; 2018 by Phat Tran Minh aka Seth Phat.
