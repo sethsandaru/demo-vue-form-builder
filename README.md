@@ -19,6 +19,11 @@ All backend code is using Laravel 5 (Just need Eloquent to do the job :D)
 5. Run: `php artisan migrate` to create the table.
 6. You can visit `http://your_host/your_folder/public` to test :D 
 
+Note: to turn on insert & update form config, you need to:
+- Open file: `config/sandaru.php`
+- Set `disable_populate` to **true**
+(Sorry for this inconvenience, I add this constraint to make sure that my Live Demo doesn't have any trash data in there)
+
 ## Live demo
 You can visit my site here: http://vue-form-builder.sethphat.com
 
