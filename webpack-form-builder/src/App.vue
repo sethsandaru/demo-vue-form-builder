@@ -27,7 +27,8 @@
             return {
                 app_name: "Demo Vue Form Builder - Seth Sandaru",
                 nav_links: [
-                    {to: "/", label: "Template (Config)"},
+                    {to: "/", label: "Index"},
+                    {to: "/template", label: "Template"},
                     {to: "/gui", label: "GUI"}
                 ],
             }

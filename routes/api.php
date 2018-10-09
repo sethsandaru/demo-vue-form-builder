@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get("/GetAllForm", 'VueAPIController@getDataSourceForm');
+Route::get('/GetFormData/{id}', 'VueAPIController@getForm')->where('id', '[0-9]+');
+Route::post('/InsertForm', 'VueAPIController@insert');
+Route::post('/UpdateForm/{id}', 'VueAPIController@update')->where('id', '[0-9]+');

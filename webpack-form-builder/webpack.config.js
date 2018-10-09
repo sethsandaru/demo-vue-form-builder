@@ -5,9 +5,9 @@ var APP_DIR = path.resolve(__dirname, 'src');
 module.exports = {
     entry: './src/main.js',
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, '../public/js'),
         publicPath: '/dist/',
-        filename: 'build.js'
+        filename: 'app.bundle.js'
     },
     module: {
         rules: [
