@@ -22,8 +22,17 @@ class VueForm extends Model
         return $this->hasMany(VueFormData::class, 'VueFormID');
     }
 
+    public function mappedRoute() {
+        return $this->hasOne(PageForm::class, 'form_id');
+    }
+
     public function latest_child() {
         return VueFormData::byVersion($this->Version)->byVueForm($this->ID)->first();
+    }
+
+    public function getLatestFormDataAttribute() {
+        $data = VueFormData::byVersion($this->Version)->byVueForm($this->ID)->first();
+        return ($data->Data) ?? null;
     }
 
     /**
@@ -44,7 +53,7 @@ class VueForm extends Model
         return $form->ID;
     }
 
-    public static function update_data($id, $title, $data) {
+    public static function update_data($id, $title, $data, $mappedPath) {
         $form = self::find($id);
         if (empty($form)) {
             return false;
@@ -57,6 +66,15 @@ class VueForm extends Model
 
         // insert new child form data (keep old child to track history of course lol)
         VueFormData::insert_data($form->ID, $data, $form->Version);
+
+        // update mappedPath
+        if (empty($form->mappedRoute)) {
+            $form->mappedRoute = new PageForm;
+            $form->form_id = $form->ID;
+        }
+
+        $form->mappedRoute->path = $mappedPath;
+        $form->mappedRoute->save();
 
         return $form->ID;
     }

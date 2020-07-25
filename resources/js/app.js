@@ -6,8 +6,11 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
+
+import 'v-form-builder/dist/v-form-builder.min.css'
+import {VueFormBuilderPlugin} from 'v-form-builder'
+Vue.use(VueFormBuilderPlugin)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,7 +18,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('my-form', require('./components/MyForm'));
+Vue.component('form-configuration', require('./components/FormConfiguration'));
 
 const app = new Vue({
     el: '#app'

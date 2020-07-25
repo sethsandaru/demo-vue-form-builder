@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\PageForm;
 use App\Models\VueForm;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,8 @@ class VueAPIController extends Controller
         $result = [
             'Title' => $form->Title,
             'Version' => $form->Version,
-            'Data' => $form->latest_child()->Data
+            'Data' => $form->LatestFormData,
+            'Path' => $form->mappedRoute->path
         ];
 
         return response()->json($result);
@@ -51,6 +53,7 @@ class VueAPIController extends Controller
 
         $title = $rq->post("title");
         $data = $rq->post("formData");
+        $mappedPath = $rq->post("mappedPath");
 
         if (empty($title) || empty($data)) {
             return response()->json(['error' => 'Title is blank or Form doesnt have any config yet!']);
@@ -60,29 +63,47 @@ class VueAPIController extends Controller
         $form_id = VueForm::insert_data($title, $data);
 
         // after inserted, you can get form_id to use and save it any where that you need to use
+        // for example
+        // I also need to insert a PageForm record to let the system know
+        // which routes are using which specific form
+        $pageForm = new PageForm();
+        $pageForm->form_id = $form_id;
+        $pageForm->path = $mappedPath;
+        $pageForm->save();
 
-        return response()->json(['success' => 'Insert success']);
+        return response()->json([
+            'success' => 'Insert success',
+            'next' => url('/form-config')
+        ]);
     }
 
     public function update($id, Request $rq) {
+        // let it goes somewhere else for the insert process
+        if ($id == 0) {
+            return $this->insert($rq);
+        }
+
         if (config('sandaru.disable_populate')) {
             return response()->json(['error' => 'Update function is disabled on this site']);
         }
 
         $title = $rq->post("title");
         $data = $rq->post("formData");
+        $mappedPath = $rq->post("mappedPath");
 
         if (empty($title) || empty($data)) {
             return response()->json(['error' => 'Title is blank or Form doesnt have any config yet!']);
         }
 
         // update old form
-        $form_id = VueForm::update_data($id, $title, $data);
+        $form_id = VueForm::update_data($id, $title, $data, $mappedPath);
         if ($form_id === false) {
             return response()->json(['error' => 'Update failed, form not existed to update']);
         }
 
-        // after updated, you can get form_id to use and save it any where that you need to use
-        return response()->json(['success' => 'Update success']);
+        return response()->json([
+            'success' => 'Update success',
+            'next' => url('/form-config')
+        ]);
     }
 }

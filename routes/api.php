@@ -17,3 +17,7 @@ Route::get("/GetAllForm", 'VueAPIController@getDataSourceForm');
 Route::get('/GetFormData/{id}', 'VueAPIController@getForm')->where('id', '[0-9]+');
 Route::post('/InsertForm', 'VueAPIController@insert');
 Route::post('/UpdateForm/{id}', 'VueAPIController@update')->where('id', '[0-9]+');
+
+
+
+Route::get('/GetFormByPath', 'PageFormAPIController@getForm');

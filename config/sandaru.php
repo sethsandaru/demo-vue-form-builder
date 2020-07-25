@@ -7,5 +7,5 @@
  */
 
 return [
-    'disable_populate' => true
+    'disable_populate' => false
 ];
