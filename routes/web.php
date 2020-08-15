@@ -16,6 +16,7 @@ Route::get('/', 'PageController@index');
 Route::get('/register', 'PageController@showForm');
 Route::get('/create-document', 'PageController@showForm');
 Route::get('/contact-us', 'PageController@showForm');
+Route::get('/custom-control', 'PageController@showForm');
 
 Route::post('/show-post-data', 'PageController@showPostData');
 
