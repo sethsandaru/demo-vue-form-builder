@@ -25,6 +25,10 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{url('/custom-control')}}">Custom Control</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="{{url('/form-config')}}">
                     Form Configuration
                 </a>
