@@ -18,7 +18,8 @@
         "laravel-mix": "^2.0",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
-        "v-form-builder": "github:sethsandaru/vue-form-builder#v2.0.0",
+        "switchery": "0.0.2",
+        "v-form-builder": "^2.0.0",
         "vue": "^2.5.7"
     }
 }

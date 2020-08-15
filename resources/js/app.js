@@ -8,9 +8,43 @@
 require('./bootstrap');
 window.Vue = require('vue');
 
-import 'v-form-builder/dist/v-form-builder.min.css'
+import 'v-form-builder/dist/v-form-builder.css'
 import {VueFormBuilderPlugin} from 'v-form-builder'
-Vue.use(VueFormBuilderPlugin)
+Vue.use(VueFormBuilderPlugin, {
+    controls: {
+        'switch': {
+            name: "Switch Field",
+            description: "Single Switch",
+
+            /**
+             * Control View Mapping
+             */
+            fieldComponent: require('./custom-controls/switch/SwitchControl'),
+
+            /**
+             * Control Configuration View Mapping
+             */
+            configComponent: require('./custom-controls/switch/SwitchConfigView'),
+
+            /**
+             * Control-Data Extend
+             * Your specific data for your custom control
+             */
+            configData: {
+                isChecked: false,
+                switchColor: "#64bd63"
+            },
+
+            /**
+             * Default data of the Switch in Renderer
+             * @returns {boolean}
+             */
+            rendererDefaultData() {
+                return false
+            },
+        },
+    }
+})
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
