@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Demo Vue Form Builder - Seth Phat</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
